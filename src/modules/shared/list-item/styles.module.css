@@ -1,0 +1,15 @@
+.items-container{
+width: 100%;
+overflow-y: auto;
+}
+.item{
+  border-bottom: 1px solid gray ;
+  padding-top: 15px;
+  padding-bottom: 15px;
+   color: gray;
+  font-weight: bold;
+}
+
+.item:last-child{
+  border-bottom: none;
+}

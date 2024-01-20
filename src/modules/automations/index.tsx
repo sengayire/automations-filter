@@ -1,8 +1,10 @@
-import { ProductCard } from '../components'
 
+import { ProductList } from "@/modules/components";
 
 export const Automations = () => {
   return (
-    <div><ProductCard /></div>
-  )
-}
+    <div>
+      <ProductList />
+    </div>
+  );
+};
