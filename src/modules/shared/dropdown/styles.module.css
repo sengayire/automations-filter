@@ -1,12 +1,14 @@
 .container{
+  position: absolute;
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 20px 20px 0px 20px ;
+  margin-top: 5px;
   width: 250px;
-  height: 250px;
+  max-height: 250px;
   background: white;
   box-shadow: 0 4px 8px 0 rgba(34, 34, 34, 0.105), 0 6px 20px 0 rgba(34, 34, 34, 0.153);
   border-radius: 10px;
-  
+  z-index: 10;
 }

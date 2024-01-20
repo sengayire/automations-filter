@@ -8,6 +8,7 @@ overflow-y: auto;
   padding-bottom: 15px;
    color: gray;
   font-weight: bold;
+    cursor: pointer;
 }
 
 .item:last-child{

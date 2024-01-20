@@ -1,0 +1,9 @@
+.container{
+  display: flex;
+  padding: 30px;
+  gap: 10px
+}
+.static-filter{
+  display: flex;
+  gap: 10px;
+}

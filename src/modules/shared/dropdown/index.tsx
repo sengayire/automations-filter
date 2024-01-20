@@ -10,6 +10,5 @@ interface ListDropdownProps {
 
 
 export const Dropdown = ({ children, show }: ListDropdownProps) => {
-  console.log('show', show)
   return show ? <div className={styles["container"]}>{children}</div> : null;
 };
