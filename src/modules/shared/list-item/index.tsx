@@ -1,9 +1,9 @@
-import React from 'react'
-import styles from './styles.module.css'
+import React from "react";
+import styles from "./styles.module.css";
 import { FaCheck } from "react-icons/fa6";
-
-interface  ListItemProps  {
-  list: string[]
+import { motion } from "framer-motion";
+interface ListItemProps {
+  list: string[];
   selectedItem?: (item: string) => void;
 }
 
@@ -16,22 +16,24 @@ export const ListItem = ({ list, selectedItem }: ListItemProps) => {
       {list.length ? (
         list.map((item) => {
           return (
-            <div
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.015 }}
+              whileTap={{ scale: 1.01 }}
               key={item}
               className={styles["item"]}
               onClick={() => handleItemClick(item)}
             >
-              <span> 
-              {item}
-              </span>
+              <span>{item}</span>
               <span className={styles.selected}>
                 <FaCheck />
               </span>
-            </div>
+            </motion.div>
           );
         })
       ) : (
-        <div className={styles['empty']}>Item not found</div>
+        <div className={styles["empty"]}>Item not found</div>
       )}
     </div>
   );
