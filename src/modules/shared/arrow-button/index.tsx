@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, ReactNode } from 'react'
 import styles from './styles.module.css'
+
 interface SearchInputPropsProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode
 }

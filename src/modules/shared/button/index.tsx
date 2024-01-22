@@ -5,11 +5,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   rightAdornment?: ReactNode;
   leftAdornment?: ReactNode;
+  isSelected?: boolean;
 }
 
-export const Button = ({ title, rightAdornment, leftAdornment, ...props }: ButtonProps) => {
+export const Button = ({ title, rightAdornment, leftAdornment, isSelected, ...props }: ButtonProps) => {
   return (
-    <button className={styles.btnSelected} {...props}>
+    <button
+      className={isSelected ? styles["button-selected"] : styles.button}
+      {...props}
+    >
       {leftAdornment}
       <span className={styles.title}>{title}</span>
       {rightAdornment}

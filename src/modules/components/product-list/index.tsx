@@ -1,28 +1,39 @@
 import {  ProductCard } from "@/modules/shared";
 import styles from './styles.module.css'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { ProductItemType } from "@/types";
 
-interface ProductListProps{
-  items?: Record<string, string>[]
-}
+import { useAtom } from "jotai";
+import { filtersAtom, productsAtom } from "@/store";
+import { removeDuplicates } from "@/utils";
 
-export const ProductList= ({items}: ProductListProps) => {
+export const ProductList= () => {
+const  [items, ] =  useAtom(productsAtom);
+const [filters] = useAtom(filtersAtom);
+const [filteredItem, setFilteredItem] = useState(items)
+
+useEffect(() => {
+  const f =  Object.values(filters);
+  if (f.flat().length) {
+    setFilteredItem(removeDuplicates(f.flat()));
+    return;
+  }
+  setFilteredItem(items);
+}, [filters]);
 
   return (
-    <div className={styles["container"]}>
-      <div className={styles["list-container"]}>
-        {items?.map((item) => {
-          return (
-            <ProductCard
-              key={item.id}
-              title={item.title}
-              description={item.shortDescription}
-              logo={item.sites[0]["logoSmall2x"]}
-            />
-          );
-        })}
-      </div>
+    <div className={styles["list-container"]}>
+      {filteredItem?.map((item: ProductItemType) => {
+        return (
+          <ProductCard
+            key={item.id}
+            title={item.title}
+            description={item.shortDescription}
+            logo={item.sites?.[0]["logoSmall2x"]}
+          />
+        );
+      })}
     </div>
   );
 };
