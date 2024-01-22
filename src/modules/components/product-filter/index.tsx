@@ -1,5 +1,5 @@
 import { Button } from "@/modules/shared";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
 import { Filter } from "../filter";
 import { SearchInput } from "@/modules/shared/search-input";
@@ -42,6 +42,8 @@ export const ProductFilter = () => {
   const [searchValue, setSearchValue] = useState("");
   const sitesList = getList(items, "sites");
   const categoryList = getList(items, "categories");
+  const ref = useRef<HTMLDivElement>(null);
+  const refDiv = useRef<HTMLDivElement>(null)
 
   const [keywords, setKeywords] = useState<string[]>([]);
   const [categories, setCategories] = useState<string>();
@@ -127,12 +129,45 @@ export const ProductFilter = () => {
     }
     setAllFilters((prev) => ({ ...prev, keywords: [] }));
   }, [categories]);
+
+  const scroll = (scrollOffset: number) => {
+    if (ref.current) ref.current.scrollLeft += scrollOffset;
+
+  };
+
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      const { boundingClientRect } = entry;
+      // Check if the right side of filters-container is at or beyond the right side of the viewport
+      if (
+        ref.current && boundingClientRect.right - 100 >=
+        ref.current.clientWidth
+      ) {
+        scroll(100);
+        // Do something when the right side of filters-container reaches the end
+      }
+    });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection);
+    if (refDiv.current) {
+      observer.observe(refDiv.current);
+    }
+
+    return () => {
+      if (refDiv.current) {
+        observer.unobserve(refDiv.current);
+      }
+    };
+  }, [keywords, categories]);
+
   return (
     <div className={styles["container"]}>
       <div className={styles["leftArrow"]}>
-        <ArrowButton icon={<IoIosArrowBack />} />
+        <ArrowButton icon={<IoIosArrowBack />} onClick={() => scroll(100)} />
       </div>
-      <div className={styles["filters-container"]}>
+      <div ref={ref} className={styles["filters-container"]}>
         <Button
           title="Extract Data"
           leftAdornment={<HiMiniArrowsUpDown />}
@@ -166,21 +201,22 @@ export const ProductFilter = () => {
             }
           />
         )}
-
-        <Filter title="Filter by Site">
-          <div>
-            <SearchInput onChange={handleSearch} />
-          </div>
-          <ListItem
-            list={sites}
-            selectedItem={(item) => {
-              if (keywords.includes(item)) {
-                return;
-              }
-              setKeywords((prev) => [...prev, item]);
-            }}
-          />
-        </Filter>
+        <div ref={refDiv}>
+          <Filter title="Filter by Site">
+            <div>
+              <SearchInput onChange={handleSearch} />
+            </div>
+            <ListItem
+              list={sites}
+              selectedItem={(item) => {
+                if (keywords.includes(item)) {
+                  return;
+                }
+                setKeywords((prev) => [...prev, item]);
+              }}
+            />
+          </Filter>
+        </div>
         <Filter title="Filter by Category">
           <ListItem
             list={categoryList}
@@ -192,7 +228,10 @@ export const ProductFilter = () => {
       </div>
 
       <div className={styles["rightArrow"]}>
-        <ArrowButton icon={<IoIosArrowForward />} />
+        <ArrowButton
+          icon={<IoIosArrowForward />}
+          onClick={() => scroll(-100)}
+        />
       </div>
     </div>
   );
