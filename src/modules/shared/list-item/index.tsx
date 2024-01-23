@@ -7,7 +7,7 @@ interface ListItemProps {
   selectedItem?: (item: string) => void;
 }
 
-export const ListItem = ({ list, selectedItem }: ListItemProps) => {
+export const ListItem = ({ list, selectedItem, ...props }: ListItemProps) => {
   const handleItemClick = (item: string) => {
     selectedItem?.(item);
   };
@@ -24,6 +24,7 @@ export const ListItem = ({ list, selectedItem }: ListItemProps) => {
               key={item}
               className={styles["item"]}
               onClick={() => handleItemClick(item)}
+              {...props}
             >
               <span>{item}</span>
               {/* <span className={styles.selected}>

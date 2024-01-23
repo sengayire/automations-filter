@@ -13,7 +13,7 @@ interface FilterProps {
 
 
 
-export const Filter = ({ children, title }: FilterProps) => {
+export const Filter = ({ children, title, ...props }: FilterProps) => {
   const [isShowDropDown, setIsShowDropDown] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null)
   const onClickOutSide = () => {
@@ -28,6 +28,7 @@ export const Filter = ({ children, title }: FilterProps) => {
         leftAdornment={<HiPlus />}
         title={title}
         onClick={() => setIsShowDropDown((prev) => !prev)}
+        {...props}
       />
       <Dropdown show={isShowDropDown}>{children}</Dropdown>
     </div>

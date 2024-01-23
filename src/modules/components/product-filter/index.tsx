@@ -173,8 +173,10 @@ export const ProductFilter = () => {
           leftAdornment={<HiMiniArrowsUpDown />}
           onClick={() => setIsExtractFilter((prev) => !prev)}
           isSelected={isExtractFilter}
+          data-cy="extract-button"
         />
         <Button
+          data-cy="monitor-button"
           title="Monitor"
           leftAdornment={<MdOutlineMonitor />}
           onClick={() => setIsMonitorFilter((prev) => !prev)}
@@ -187,7 +189,7 @@ export const ProductFilter = () => {
               title={filter}
               isSelected={keywords.length > 0}
               rightAdornment={
-                <IoMdClose onClick={() => handleRemoveFilter(index)} />
+                <IoMdClose onClick={() => handleRemoveFilter(index)}  data-testid="keyword-id"/>
               }
             />
           );
@@ -197,16 +199,17 @@ export const ProductFilter = () => {
             title={categories}
             isSelected={!!categories}
             rightAdornment={
-              <IoMdClose onClick={() => setCategories(undefined)} />
+              <IoMdClose onClick={() => setCategories(undefined)}  />
             }
           />
         )}
         <div ref={refDiv}>
-          <Filter title="Filter by Site">
+          <Filter  data-cy="filter-site" title="Filter by Site">
             <div>
-              <SearchInput onChange={handleSearch} />
+              <SearchInput data-cy="search-input" onChange={handleSearch} placeholder="Search"/>
             </div>
             <ListItem
+              data-cy="site-item"
               list={sites}
               selectedItem={(item) => {
                 if (keywords.includes(item)) {
@@ -217,8 +220,9 @@ export const ProductFilter = () => {
             />
           </Filter>
         </div>
-        <Filter title="Filter by Category">
+        <Filter data-cy="filter-category" title="Filter by Category" data-testid="filter-id">
           <ListItem
+            data-cy="category-item"
             list={categoryList}
             selectedItem={(item) => {
               setCategories(item);
