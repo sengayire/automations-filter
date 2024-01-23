@@ -1,12 +1,14 @@
 import {atom} from 'jotai'
-const URL = "./Assessment.json";
+import data from '@/services/Assessment.json'
+// const URL = "/Assessment.json";
 
 export const productsAtom = atom(() => {
- return  fetch(URL)
-    .then((response) => response.json())
-    .then(({data}) => {
-     return data.oneClickAutomations.items;
-    });
+  //  return  fetch(URL)
+  //     .then((response) => response.json())
+  //     .then(({data}) => {
+  //      return data.oneClickAutomations.items;
+  //     });
+       return data.data.oneClickAutomations.items;
 }, )
 
 export const extractFilterAtom = atom(false)
