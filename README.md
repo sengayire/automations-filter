@@ -19,6 +19,23 @@ First, run the development server in your terminal type:
 ```bash
 yarn install
 yarn dev
+```
 
+## Run unit test
+
+you can run the unit test by running the following command
+
+```bash
+yarn test
+```
+
+## Run end to end testing
+
+you can run the end to end testing by running the following command
+
+
+```bash
+yarn cypress:open
+```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
