@@ -11,12 +11,12 @@ import { removeDuplicates } from "@/utils";
 export const ProductList= () => {
 const  [items, ] =  useAtom(productsAtom);
 const [filters] = useAtom(filtersAtom);
-const [filteredItem, setFilteredItem] = useState(items)
+const [filteredItem, setFilteredItem] = useState<ProductItemType[]>(items);
 
 useEffect(() => {
   const f =  Object.values(filters);
   if (f.flat().length) {
-    setFilteredItem(removeDuplicates(f.flat()));
+    setFilteredItem(removeDuplicates(f.flat() as []) as []);
     return;
   }
   setFilteredItem(items);

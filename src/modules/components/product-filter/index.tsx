@@ -8,7 +8,7 @@ import { HiMiniArrowsUpDown } from "react-icons/hi2";
 import { ListItem } from "@/modules/shared/list-item";
 import { ArrowButton } from "@/modules/shared/arrow-button";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { ProductItemType } from "@/types";
+import { FiltersType, ProductItemType } from "@/types";
 import { removeDuplicates } from "@/utils";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineMonitor } from "react-icons/md";
@@ -81,7 +81,7 @@ export const ProductFilter = () => {
       const extract = items.filter((item: ProductItemType) =>
         item.title.toLowerCase().includes("extract")
       );
-      setAllFilters((prev) => ({ ...prev, extract: extract }));
+      setAllFilters((prev: FiltersType) => ({ ...prev, extract: extract }));
       return;
     }
   setAllFilters((prev) => ({ ...prev, extract: [] }));
@@ -92,7 +92,7 @@ export const ProductFilter = () => {
       const monitor = items.filter((item: ProductItemType) =>
         item.title.toLowerCase().includes("monitor")
       );
-      setAllFilters((prev) => ({ ...prev, monitor: monitor }));
+      setAllFilters((prev: FiltersType) => ({ ...prev, monitor: monitor }));
       return;
     }
     setAllFilters((prev) => ({ ...prev, monitor: [] }));
