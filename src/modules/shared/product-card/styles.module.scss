@@ -1,4 +1,7 @@
 @use '../../../../variables' as v;
+
+@import '../../../../media';
+
 .container{
   width: 200px;
   height: 200px;
@@ -13,5 +16,10 @@
   .description{
     overflow-wrap: break-word;
     color: gray;
+  }
+
+
+  @include respond-to('small') {
+    width: 350px;
   }
 }

@@ -1,4 +1,5 @@
 @use '../../../../variables' as v;
+@import '../../../../media';
 .container{
   display: flex;
   padding: 30px 0 30px 0px;
@@ -32,6 +33,15 @@
   position: absolute; 
   left: 0;
   z-index: 4;
+  }
+
+  @include respond-to('small') {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
   }
 }
 

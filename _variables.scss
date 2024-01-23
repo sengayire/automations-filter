@@ -16,3 +16,11 @@ $gap: 10px;
 $gap-medium: 15px;
 
 $box-shadow: 0 4px 8px 0 rgba(34, 34, 34, 0.105), 0 6px 20px 0 rgba(34, 34, 34, 0.153);
+
+$breakpoints: (
+  'small': (max-width: 576px),
+  'medium': (max-width: 768px),
+  'large': (max-width: 992px),
+  'huge': (max-width: 1400px),
+);
+
