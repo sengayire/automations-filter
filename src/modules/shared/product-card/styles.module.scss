@@ -1,0 +1,17 @@
+@use '../../../../variables' as v;
+.container{
+  width: 200px;
+  height: 200px;
+  border: v.$border v.$gray_color;
+  border-radius: 10px;
+  padding: 20px;
+  .title{
+    font-weight: bold;
+    font-size: 16px;
+    padding-top: v.$padding-large;
+  }
+  .description{
+    overflow-wrap: break-word;
+    color: gray;
+  }
+}

@@ -1,0 +1,10 @@
+@use '../../../../variables' as v;
+
+.input{
+  border: v.$border v.$gray_color;
+  border-radius: 10px;
+  width: 230px;
+  height: 20px;
+  color: v.$gray_color;
+  padding: v.$padding-large;
+}

@@ -1,14 +1,16 @@
+@use '../../../../variables' as v;
+
 .button{
   display: flex;
   align-items: center;
   justify-content: center;
-  border:1px solid gray;
-  border-radius: 100%;
+  border: v.$border v.$gray_color;
+  border-radius: v.$button-radius-full;
   background: white;
   text-align: center;
   width: 30px;
   height: 30px;
-  color: #492e87;
+  color: v.$button-selected;
   cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(34, 34, 34, 0.105), 0 6px 20px 0 rgba(34, 34, 34, 0.153);
+  box-shadow: v.$box-shadow;
 }

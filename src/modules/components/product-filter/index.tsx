@@ -1,6 +1,6 @@
 import { Button } from "@/modules/shared";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 import { Filter } from "../filter";
 import { SearchInput } from "@/modules/shared/search-input";
 import { HiMiniArrowsUpDown } from "react-icons/hi2";

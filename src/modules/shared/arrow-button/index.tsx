@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, ReactNode } from 'react'
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 import { motion} from 'framer-motion'
 
 interface SearchInputPropsProps extends ButtonHTMLAttributes<HTMLButtonElement> {

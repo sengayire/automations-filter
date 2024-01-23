@@ -1,0 +1,32 @@
+
+
+@use  '../../../../variables' as v;
+
+.button-selected {
+  display: flex;
+  justify-content: center;
+  border-radius: v.$button-radius;
+  padding: v.$padding-medium;
+  width: fit-content;
+  border: v.$border ;
+  background: v.$button-background;
+  color: v.$button-selected;
+  cursor: pointer;
+  white-space:nowrap
+}
+.button {
+  display: flex;
+  justify-content: center;
+  border-radius: v.$button-radius;
+  padding: v.$padding-medium;
+  width: fit-content;
+  border: v.$border;
+  color: v.$gray_color;
+  cursor: pointer;
+  white-space:nowrap;
+  .title{
+  padding-left: v.$padding-small;
+  padding-right: v.$padding-small;
+  }
+}
+

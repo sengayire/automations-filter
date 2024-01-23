@@ -1,7 +1,9 @@
+@use '../../../../variables' as v;
+
 .list-container{
   display: grid;
   grid-template-columns: 250px 250px 250px 250px;
-  column-gap: 15px;
-  row-gap: 15px;
+  column-gap:v.$gap-medium;
+  row-gap: v.$gap-medium;
   width: 80%;
 }

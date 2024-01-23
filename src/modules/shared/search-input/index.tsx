@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes } from 'react'
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {};
 

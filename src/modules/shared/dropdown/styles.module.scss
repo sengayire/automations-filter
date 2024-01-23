@@ -1,3 +1,4 @@
+@use '../../../../variables' as v;
 .container{
   position: fixed;
   display: flex;
@@ -8,7 +9,7 @@
   width: 250px;
   max-height: 250px;
   background: white;
-  box-shadow: 0 4px 8px 0 rgba(34, 34, 34, 0.105), 0 6px 20px 0 rgba(34, 34, 34, 0.153);
+  box-shadow: v.$box-shadow;
   border-radius: 10px;
   z-index:3;
 }

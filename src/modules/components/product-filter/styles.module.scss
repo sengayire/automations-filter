@@ -1,0 +1,37 @@
+@use '../../../../variables' as v;
+.container{
+  display: flex;
+  padding: 30px 0 30px 0px;
+  width: 80%;
+  position: relative;
+  align-items: center;
+  .filters-container{
+    display: flex;
+    width: 100%;
+    gap: v.$gap;
+    position: relative;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    padding-left: v.$padding-xlarge;
+    padding-right: v.$padding-xlarge;
+    padding-top: v.$padding-large;
+    padding-bottom: v.$padding-large;
+  }
+  .filters-container::-webkit-scrollbar {
+      display: none;
+  }
+  .rightArrow{
+  position: absolute; 
+  right: 0;
+  z-index: 4;
+  }
+  
+  .leftArrow{
+  position: absolute; 
+  left: 0;
+  z-index: 4;
+  }
+}
+

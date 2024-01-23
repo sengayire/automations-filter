@@ -1,5 +1,5 @@
 import {  ProductCard } from "@/modules/shared";
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 import React, { useEffect, useState } from 'react'
 import { ProductItemType } from "@/types";
