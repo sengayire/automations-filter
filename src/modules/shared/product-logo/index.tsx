@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 interface PropsProps  {
   logo: string;
 };

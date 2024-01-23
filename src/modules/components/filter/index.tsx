@@ -3,7 +3,7 @@ import { Button } from '@/modules/shared'
 import { Dropdown } from '@/modules/shared/dropdown'
 import React, { ReactNode, useRef, useState } from 'react'
 import { HiPlus } from "react-icons/hi";
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 
 interface FilterProps {

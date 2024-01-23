@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 import { FaCheck } from "react-icons/fa6";
 import { motion } from "framer-motion";
 interface ListItemProps {

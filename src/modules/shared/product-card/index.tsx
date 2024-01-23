@@ -2,7 +2,7 @@
 import React from 'react'
 import { ProductLogo } from '..';
 import { motion } from "framer-motion";
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 interface ProductCardProps {
   logo: string;
