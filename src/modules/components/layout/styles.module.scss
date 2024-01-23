@@ -1,8 +1,13 @@
+@import '../../../../media';
+
 .container{
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 margin: 0 10rem;
-width: 80%;
+@include respond-to('small') {
+  display: flex;
+  margin: 0;
+  }
 }

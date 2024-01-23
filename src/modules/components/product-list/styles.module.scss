@@ -1,4 +1,5 @@
 @use '../../../../variables' as v;
+@import '../../../../media';
 
 .list-container{
   display: grid;
@@ -6,4 +7,12 @@
   column-gap:v.$gap-medium;
   row-gap: v.$gap-medium;
   width: 80%;
+
+  @include respond-to('small') {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
 }

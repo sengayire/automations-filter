@@ -26,9 +26,9 @@ export const ListItem = ({ list, selectedItem }: ListItemProps) => {
               onClick={() => handleItemClick(item)}
             >
               <span>{item}</span>
-              <span className={styles.selected}>
+              {/* <span className={styles.selected}>
                 <FaCheck />
-              </span>
+              </span> */}
             </motion.div>
           );
         })
