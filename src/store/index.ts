@@ -1,5 +1,6 @@
 import {atom} from 'jotai'
 import data from '@/services/Assessment.json'
+import { FiltersType } from '@/types';
 // const URL = "/Assessment.json";
 
 export const productsAtom = atom(() => {
@@ -15,7 +16,7 @@ export const extractFilterAtom = atom(false)
 
 export const monitorFilterAtom = atom(false)
 
-export const filtersAtom = atom({
+export const filtersAtom = atom<FiltersType>({
   extract: [],
   monitor: [],
   keywords: [],
