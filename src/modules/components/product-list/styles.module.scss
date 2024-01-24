@@ -17,11 +17,4 @@
     padding-top: 160px;
 
   }
-   @include respond-to('medium') {
-    display: grid;
-   grid-template-columns: 300px 300px;
-   column-gap:v.$gap-medium;
-   row-gap: v.$gap-medium;
-   padding-top: 160px;
-  }
 }
