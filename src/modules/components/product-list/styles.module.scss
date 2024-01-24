@@ -6,7 +6,7 @@
   grid-template-columns: 300px 300px 300px 300px;
   column-gap:v.$gap-medium;
   row-gap: v.$gap-medium;
-  padding-top: 150px;
+  padding-top: 200px;
   @include respond-to('small') {
     display: flex;
     flex-direction: column;

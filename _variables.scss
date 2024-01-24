@@ -19,6 +19,7 @@ $box-shadow: 0 4px 8px 0 rgba(34, 34, 34, 0.105), 0 6px 20px 0 rgba(34, 34, 34, 
 
 $breakpoints: (
   'small': (max-width: 576px),
+  'medium': (min-width: 768px),
   'large': (min-width: 992px),
   'huge': (max-width: 1400px),
 );
