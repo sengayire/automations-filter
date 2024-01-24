@@ -13,7 +13,7 @@
   background: white;
   box-shadow: v.$box-shadow;
   border-radius: 10px;
-  z-index:3;
+  z-index: 999;
   @include respond-to('small') {
   left: 1%;
   }
