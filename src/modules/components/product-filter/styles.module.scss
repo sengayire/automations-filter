@@ -2,10 +2,15 @@
 @import '../../../../media';
 .container{
   display: flex;
-  padding: 30px 0 30px 0px;
+  flex-direction: column;
   width: 80%;
-  position: relative;
+  background: white;
+  padding: 30px 0px 0px 0px;
+  position: fixed;
   align-items: center;
+  top: 0;
+
+width: 75%;
   .filters-container{
     display: flex;
     width: 100%;
@@ -19,6 +24,16 @@
     padding-right: v.$padding-xlarge;
     padding-top: v.$padding-large;
     padding-bottom: v.$padding-large;
+  }
+  .see-all{
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: v.$padding-xlarge;
+    display: flex;
+    span{
+      cursor: pointer;
+     color: v.$button-selected;
+    }
   }
   .filters-container::-webkit-scrollbar {
       display: none;
@@ -40,8 +55,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: auto;
     overflow-x: hidden;
+    width: 100%;
+    .filters-container{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   }
 }
 

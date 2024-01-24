@@ -44,6 +44,7 @@ export const ProductFilter = () => {
   const categoryList = getList(items, "categories");
   const ref = useRef<HTMLDivElement>(null);
   const refDiv = useRef<HTMLDivElement>(null)
+  const [showArrow, setShowArrow] = useState(false)
 
   const [keywords, setKeywords] = useState<string[]>([]);
   const [categories, setCategories] = useState<string>();
@@ -127,7 +128,7 @@ export const ProductFilter = () => {
       }));
       return;
     }
-    setAllFilters((prev) => ({ ...prev, keywords: [] }));
+    setAllFilters((prev) => ({ ...prev, categories: [] }));
   }, [categories]);
 
   const scroll = (scrollOffset: number) => {
@@ -138,13 +139,12 @@ export const ProductFilter = () => {
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       const { boundingClientRect } = entry;
-      // Check if the right side of filters-container is at or beyond the right side of the viewport
       if (
-        ref.current && boundingClientRect.right - 100 >=
+        ref.current && boundingClientRect.right >=
         ref.current.clientWidth
       ) {
         scroll(100);
-        // Do something when the right side of filters-container reaches the end
+        setShowArrow(true)
       }
     });
   };
@@ -164,9 +164,21 @@ export const ProductFilter = () => {
 
   return (
     <div className={styles["container"]}>
-      <div className={styles["leftArrow"]}>
-        <ArrowButton icon={<IoIosArrowBack />} onClick={() => scroll(100)} />
+      <div className={styles['see-all']}>
+        <div>Here are some Automations that pre-defined fro product availability</div>
+        <div><span onClick={() => { 
+          setKeywords([])
+          setCategories('')
+        
+        }}>See all</span></div>
       </div>
+      <div style={{position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        
+      {
+        showArrow && <div className={styles["leftArrow"]}>
+        <ArrowButton icon={<IoIosArrowBack />} onClick={() => scroll(-100)} />
+      </div>
+      }
       <div ref={ref} className={styles["filters-container"]}>
         <Button
           title="Extract Data"
@@ -199,7 +211,9 @@ export const ProductFilter = () => {
             title={categories}
             isSelected={!!categories}
             rightAdornment={
-              <IoMdClose onClick={() => setCategories(undefined)}  />
+              <IoMdClose onClick={() => {
+                setCategories(undefined)
+              }}  />
             }
           />
         )}
@@ -230,12 +244,13 @@ export const ProductFilter = () => {
           />
         </Filter>
       </div>
-
-      <div className={styles["rightArrow"]}>
+     {showArrow && <div className={styles["rightArrow"]}>
         <ArrowButton
           icon={<IoIosArrowForward />}
-          onClick={() => scroll(-100)}
+          onClick={() => scroll(100)}
         />
+      </div>
+}
       </div>
     </div>
   );

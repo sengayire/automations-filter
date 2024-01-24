@@ -2,12 +2,9 @@
 
 .container{
 display: flex;
-flex-direction: column;
 justify-content: center;
-align-items: center;
-margin: 0 10rem;
 @include respond-to('small') {
   display: flex;
-  margin: 0;
+  margin: 10px;
   }
 }

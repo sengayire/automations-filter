@@ -3,16 +3,25 @@
 
 .list-container{
   display: grid;
-  grid-template-columns: 250px 250px 250px 250px;
+  grid-template-columns: 300px 300px 300px 300px;
   column-gap:v.$gap-medium;
   row-gap: v.$gap-medium;
-  width: 80%;
-
+  padding-top: 150px;
   @include respond-to('small') {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 160px;
+
+  }
+   @include respond-to('medium') {
+    display: grid;
+   grid-template-columns: 300px 300px;
+   column-gap:v.$gap-medium;
+   row-gap: v.$gap-medium;
+   padding-top: 160px;
   }
 }

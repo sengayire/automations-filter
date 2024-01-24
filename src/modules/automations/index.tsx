@@ -7,6 +7,5 @@ export const Automations = () => {
   <ProductFilter />
   <ProductList />
 </Layout>
-
   );
 };

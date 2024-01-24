@@ -3,7 +3,6 @@
 @import '../../../../media';
 
 .container{
-  width: 200px;
   height: 200px;
   border: v.$border v.$gray_color;
   border-radius: 10px;
@@ -20,6 +19,6 @@
 
 
   @include respond-to('small') {
-    width: 350px;
+    width: 90%;
   }
 }
