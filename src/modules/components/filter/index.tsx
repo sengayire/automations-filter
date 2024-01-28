@@ -7,21 +7,31 @@ import styles from './styles.module.scss'
 
 
 interface FilterProps {
+  /**
+   * Component children
+   */
   children: ReactNode;
-  title: string
+  /**
+   * Filter title
+   */
+  title: string;
+  /**
+   *
+   * @returns Callback when component closed
+   */
+  onClose?: () => void;
 }
 
-
-
-export const Filter = ({ children, title, ...props }: FilterProps) => {
+export const Filter = ({ children, title, onClose, ...props }: FilterProps) => {
   const [isShowDropDown, setIsShowDropDown] = useState(false);
-  const popupRef = useRef<HTMLDivElement>(null)
+  const popupRef = useRef<HTMLDivElement>(null);
   const onClickOutSide = () => {
-    setIsShowDropDown(false)
-  }
+    setIsShowDropDown(false);
+    onClose?.();
+  };
 
- useClickOutside(popupRef, onClickOutSide);
- 
+  useClickOutside(popupRef, onClickOutSide);
+
   return (
     <div className={styles.container} ref={popupRef}>
       <Button

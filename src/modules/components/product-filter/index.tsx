@@ -1,151 +1,35 @@
-import { Button } from "@/modules/shared";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import styles from "./styles.module.scss";
-import { Filter } from "../filter";
-import { SearchInput } from "@/modules/shared/search-input";
-import { HiMiniArrowsUpDown } from "react-icons/hi2";
+import styles from './styles.module.scss';
+import { ArrowButton } from '@/modules/shared/arrow-button';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { useProductFilter } from '@/hooks';
+import { ExtractFilter } from '../extract-filter';
+import { MonitorFilter } from '../monitor-filter';
+import { SitesFilter } from '../sites-filter';
+import { CategoriesFilter } from '../categories-filter';
+import { FilterKeywords } from '../filter-keywords';
+import { FiltersHeader } from '../filters-header';
+import { useEffect, useRef } from 'react';
 
-import { ListItem } from "@/modules/shared/list-item";
-import { ArrowButton } from "@/modules/shared/arrow-button";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { FiltersType, ProductItemType } from "@/types";
-import { removeDuplicates } from "@/utils";
-import { IoMdClose } from "react-icons/io";
-import { MdOutlineMonitor } from "react-icons/md";
-import {
-  extractFilterAtom,
-  filtersAtom,
-  monitorFilterAtom,
-  productsAtom,
-} from "@/store";
-import { useAtom } from "jotai";
-interface ProductFilter {
-  items?: ProductItemType[];
-}
-
-const getList = (
-  items: ProductItemType[],
-  listName: "sites" | "categories"
-) => {
-  const list = items?.flatMap((item: ProductItemType) =>
-    item[listName]?.map((value) => value.title)
-  );
-
-  return removeDuplicates(list);
-};
-
+// Product filter component to handle automations filtering
 export const ProductFilter = () => {
-  const [items] = useAtom(productsAtom);
-  const [isExtractFilter, setIsExtractFilter] = useAtom(extractFilterAtom);
-  const [isMonitorFilter, setIsMonitorFilter] = useAtom(monitorFilterAtom);
-  const [, setAllFilters] = useAtom(filtersAtom);
-  const [searchValue, setSearchValue] = useState("");
-  const sitesList = getList(items, "sites");
-  const categoryList = getList(items, "categories");
+  const { showArrow, scroll, setShowArrow, keywords, categories } =
+    useProductFilter();
   const ref = useRef<HTMLDivElement>(null);
-  const refDiv = useRef<HTMLDivElement>(null)
-  const [showArrow, setShowArrow] = useState(false)
-
-  const [keywords, setKeywords] = useState<string[]>([]);
-  const [categories, setCategories] = useState<string>();
-
-  const [sites, setSites] = useState(sitesList);
-
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    const {
-      target: { value },
-    } = event;
-    setSearchValue(value);
-    const filterSites = sites.filter((site) =>
-      site.toLowerCase().includes(value.toLowerCase())
-    );
-    setSites(filterSites);
-  };
-
-  const handleRemoveFilter = (itemIndex: number) => {
-    const removeFilter = keywords.splice(itemIndex, 1) as unknown;
-    setKeywords((prev) => {
-      return prev.filter((filter) => filter !== removeFilter);
-    });
-  };
-
-  useEffect(() => {
-    if (searchValue === "") {
-      const sitesList = getList(items, "sites");
-      setSites(sitesList);
-    }
-  }, [searchValue]);
-
-  useEffect(() => {
-    if (isExtractFilter) {
-      const extract = items.filter((item: ProductItemType) =>
-        item.title.toLowerCase().includes("extract")
-      );
-      setAllFilters((prev: FiltersType) => ({ ...prev, extract: extract }));
-      return;
-    }
-  setAllFilters((prev) => ({ ...prev, extract: [] }));
-  }, [isExtractFilter]);
-
-  useEffect(() => {
-    if (isMonitorFilter) {
-      const monitor = items.filter((item: ProductItemType) =>
-        item.title.toLowerCase().includes("monitor")
-      );
-      setAllFilters((prev: FiltersType) => ({ ...prev, monitor: monitor }));
-      return;
-    }
-    setAllFilters((prev) => ({ ...prev, monitor: [] }));
-  }, [isMonitorFilter]);
-
-  useEffect(() => {
-    if (keywords.length) {
-      const keywordsFilters = keywords.map((key) => {
-        const d = items.filter((item: ProductItemType) => {
-          return item.sites[0].title === key;
-        });
-        return d;
-      });
-
-      setAllFilters((prev) => ({
-        ...prev,
-        keywords: keywordsFilters.flatMap((a) => a) as [],
-      }));
-      return;
-    }
-    setAllFilters((prev) => ({ ...prev, keywords: [] }));
-  }, [keywords]);
-
-  useEffect(() => {
-    if (!!categories) {
-      const categoriesFilters = items.filter((item: ProductItemType) =>
-        item.categories.find((category) => category.title === categories)
-      );
-      setAllFilters((prev) => ({
-        ...prev,
-        categories: categoriesFilters,
-      }));
-      return;
-    }
-    setAllFilters((prev) => ({ ...prev, categories: [] }));
-  }, [categories]);
-
-  const scroll = (scrollOffset: number) => {
-    if (ref.current) ref.current.scrollLeft += scrollOffset;
-
-  };
+  const refDiv = useRef<HTMLDivElement>(null);
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       const { boundingClientRect } = entry;
-      if (
-        ref.current && boundingClientRect.right >=
-        ref.current.clientWidth
-      ) {
-        scroll(100);
-        setShowArrow(true)
+      console.log(
+        ' ref.current.clientWidth',
+        ref.current?.clientWidth,
+        boundingClientRect.right
+      );
+      if (ref.current && boundingClientRect.right >= ref.current.clientWidth) {
+        scroll(ref, 100);
+        return setShowArrow(true);
       }
+      setShowArrow(false);
     });
   };
 
@@ -163,94 +47,40 @@ export const ProductFilter = () => {
   }, [keywords, categories]);
 
   return (
-    <div className={styles["container"]}>
-      <div className={styles['see-all']}>
-        <div>Here are some Automations that pre-defined fro product availability</div>
-        <div><span onClick={() => { 
-          setKeywords([])
-          setCategories('')
-        
-        }}>See all</span></div>
-      </div>
-      <div style={{position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        
-      {
-        showArrow && <div className={styles["leftArrow"]}>
-        <ArrowButton icon={<IoIosArrowBack />} onClick={() => scroll(-100)} />
-      </div>
-      }
-      <div ref={ref} className={styles["filters-container"]}>
-        <Button
-          title="Extract Data"
-          leftAdornment={<HiMiniArrowsUpDown />}
-          onClick={() => setIsExtractFilter((prev) => !prev)}
-          isSelected={isExtractFilter}
-          data-cy="extract-button"
-        />
-        <Button
-          data-cy="monitor-button"
-          title="Monitor"
-          leftAdornment={<MdOutlineMonitor />}
-          onClick={() => setIsMonitorFilter((prev) => !prev)}
-          isSelected={isMonitorFilter}
-        />
-        {keywords.map((filter, index) => {
-          return (
-            <Button
-              key={index}
-              title={filter}
-              isSelected={keywords.length > 0}
-              rightAdornment={
-                <IoMdClose onClick={() => handleRemoveFilter(index)}  data-testid="keyword-id"/>
-              }
+    <div className={styles['container']}>
+      <FiltersHeader />
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {showArrow && (
+          <div className={styles['leftArrow']}>
+            <ArrowButton
+              icon={<IoIosArrowBack />}
+              onClick={() => scroll(ref, -100)}
             />
-          );
-        })}
-        {categories && (
-          <Button
-            title={categories}
-            isSelected={!!categories}
-            rightAdornment={
-              <IoMdClose onClick={() => {
-                setCategories(undefined)
-              }}  />
-            }
-          />
+          </div>
         )}
-        <div ref={refDiv}>
-          <Filter  data-cy="filter-site" title="Filter by Site">
-            <div>
-              <SearchInput data-cy="search-input" onChange={handleSearch} placeholder="Search"/>
-            </div>
-            <ListItem
-              data-cy="site-item"
-              list={sites}
-              selectedItem={(item) => {
-                if (keywords.includes(item)) {
-                  return;
-                }
-                setKeywords((prev) => [...prev, item]);
-              }}
-            />
-          </Filter>
+        <div ref={ref} className={styles['filters-container']}>
+          <ExtractFilter />
+          <MonitorFilter />
+          <FilterKeywords />
+          <SitesFilter ref={refDiv} />
+          <CategoriesFilter />
         </div>
-        <Filter data-cy="filter-category" title="Filter by Category" data-testid="filter-id">
-          <ListItem
-            data-cy="category-item"
-            list={categoryList}
-            selectedItem={(item) => {
-              setCategories(item);
-            }}
-          />
-        </Filter>
-      </div>
-     {showArrow && <div className={styles["rightArrow"]}>
-        <ArrowButton
-          icon={<IoIosArrowForward />}
-          onClick={() => scroll(100)}
-        />
-      </div>
-}
+        {showArrow && (
+          <div className={styles['rightArrow']}>
+            <ArrowButton
+              icon={<IoIosArrowForward />}
+              onClick={() => scroll(ref, 100)}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
