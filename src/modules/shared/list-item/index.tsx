@@ -22,14 +22,11 @@ export const ListItem = ({ list, selectedItem, ...props }: ListItemProps) => {
               whileHover={{ scale: 1.015 }}
               whileTap={{ scale: 1.01 }}
               key={item}
-              className={styles["item"]}
+              className={styles['item']}
               onClick={() => handleItemClick(item)}
               {...props}
             >
               <span>{item}</span>
-              {/* <span className={styles.selected}>
-                <FaCheck />
-              </span> */}
             </motion.div>
           );
         })
