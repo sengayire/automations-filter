@@ -9,8 +9,7 @@
   position: fixed;
   align-items: center;
   top: 0;
-
-width: 75%;
+  width: 75%;
   .filters-container{
     display: flex;
     width: 100%;
@@ -25,16 +24,7 @@ width: 75%;
     padding-top: v.$padding-large;
     padding-bottom: v.$padding-large;
   }
-  .see-all{
-    width: 100%;
-    justify-content: space-between;
-    padding-bottom: v.$padding-xlarge;
-    display: flex;
-    span{
-      cursor: pointer;
-     color: v.$button-selected;
-    }
-  }
+ 
   .filters-container::-webkit-scrollbar {
       display: none;
   }
@@ -55,7 +45,7 @@ width: 75%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: auto;
+    width: 100%;
     overflow-x: hidden;
     width: 100%;
     .filters-container{

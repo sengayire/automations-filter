@@ -1,0 +1,12 @@
+@use '../../../../variables' as v;
+
+ .see-all{
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: v.$padding-xlarge;
+    display: flex;
+    span{
+      cursor: pointer;
+     color: v.$button-selected;
+    }
+  }
