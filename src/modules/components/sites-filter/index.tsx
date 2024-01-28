@@ -72,3 +72,5 @@ export const SitesFilter = forwardRef<HTMLDivElement>((_, ref) => {
     </div>
   );
 });
+
+SitesFilter.displayName = 'SitesFilter';
