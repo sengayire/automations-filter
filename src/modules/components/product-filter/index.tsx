@@ -20,7 +20,6 @@ export const ProductFilter = () => {
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       const { boundingClientRect } = entry;
-
       if (ref.current && boundingClientRect.right >= ref.current.clientWidth) {
         scroll(ref, 100);
         return setShowArrow(true);
